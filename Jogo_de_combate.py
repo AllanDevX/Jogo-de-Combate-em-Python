@@ -2,8 +2,6 @@
 # Heroi: controlado pelo o usuario
 # inimigo: controlado pelo usuario
 
-
-
 class Personagem:
     def __init__(self, nome, vida, nivel):
         self.__nome = nome
@@ -42,9 +40,26 @@ class Inimigo(Personagem):
         return self.__tipo
 
     def exibir_detalhes(self):
-        return  f"{super().exibir_detalhes()}\nTipo: {self.get_tipo()}"
+        return  f"{super().exibir_detalhes()}\nTipo: {self.get_tipo()}\n"
 
-heroi = Heroi(nome="Heroi", vida= 100, nivel= 5, habilidade= "Super Força")
-print(heroi.exibir_detalhes())
-inimigo = Inimigo(nome="Morcego", vida=50, nivel= 3, tipo= "voador")
-print(inimigo.exibir_detalhes())
+class Jogo:
+    """ Classe Orquestradora do Jogo"""
+
+    def __init__(self):
+        self.heroi = Heroi(nome="Heroi", vida= 100, nivel= 5, habilidade= "Super Força")
+        self.inimigo = Inimigo(nome="Morcego", vida=50, nivel= 3, tipo= "voador")
+
+    def iniciar_batalha(self):
+        """Fazer a gestão da batalha em turnos"""
+        print("Iniciando a batalha...")
+        while self.heroi.get_vida() > 0 and self.inimigo.get_vida() > 0:
+            print("\nDetalhes dos Personagens:")
+            print(self.heroi.exibir_detalhes())
+            print(self.inimigo.exibir_detalhes())
+
+            input("Pressione Enter para atacar...")
+            escolha = input("Escolha (1 - Ataque Normal, 2 - Ataque Especial: ")
+
+# Cria instância do jogo e iniciar batalha
+jogo = Jogo()
+jogo.iniciar_batalha()
